@@ -55,6 +55,7 @@ module.exports.loop = function ()
         {
             if (!isStorageFull(creep.room))
             {
+              console.log("Storage is not full");
               roleHarvester.run(creep);
             }
             else
@@ -69,6 +70,7 @@ module.exports.loop = function ()
                 roleUpgrader.run(creep);
               }
         }
+
         if(creep.memory.role == 'upgrader')
         {
           roleUpgrader.run(creep);
