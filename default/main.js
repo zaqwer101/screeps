@@ -14,12 +14,19 @@ function isStructureToBuild(room)
     return false;
 }
 
-function isStorageFull()
+function isStorageFull(room)
 {
-  if (Game.spawns["Spawn1"].energyCapacity == Game.spawns["Spawn1"].energy)
-    return true;
-  else
-    return false;
+  bool isFull = false;
+  for(var structure in room.find(FIND_STRUCTURES))
+  {
+    if ((structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) && structure.energy < structure.energyCapacity)
+    {
+      isFull = true;
+      break;
+    }
+  }
+
+  return isFull;
 }
 
 module.exports.loop = function ()
@@ -45,7 +52,7 @@ module.exports.loop = function ()
         // Assign roles to workers
         if(creep.memory.role == 'harvester')
         {
-            if (!isStorageFull())
+            if (!isStorageFull(room))
               roleHarvester.run(creep);
             else
               if (isStructureToBuild(creep.room))
@@ -62,7 +69,7 @@ module.exports.loop = function ()
           if (isStructureToBuild(creep.room))
             roleBuilder.run(creep);
           else
-            if (!isStorageFull())
+            if (!isStorageFull(room))
               roleHarvester.run(creep);
             else
               roleUpgrader.run(creep);
