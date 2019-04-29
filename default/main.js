@@ -60,7 +60,7 @@ module.exports.loop = function ()
             {
               if(countDuplicates(creep.pos) >= 10)
               {
-                for(int i=0; i < Game.spawns["Spawn1"].memory.frequentPoints.length; i++)
+                for(var i=0; i < Game.spawns["Spawn1"].memory.frequentPoints.length; i++)
                 {
                   if(Game.spawns["Spawn1"].memory.frequentPoints[i] === creep.pos)
                   {
