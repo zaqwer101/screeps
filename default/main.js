@@ -52,7 +52,7 @@ module.exports.loop = function ()
         // Assign roles to workers
         if(creep.memory.role == 'harvester')
         {
-            if (!isStorageFull(room))
+            if (!isStorageFull(creep.room))
               roleHarvester.run(creep);
             else
               if (isStructureToBuild(creep.room))
@@ -69,7 +69,7 @@ module.exports.loop = function ()
           if (isStructureToBuild(creep.room))
             roleBuilder.run(creep);
           else
-            if (!isStorageFull(room))
+            if (!isStorageFull(creep.room))
               roleHarvester.run(creep);
             else
               roleUpgrader.run(creep);
