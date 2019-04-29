@@ -2,8 +2,9 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 
-var harvesterBody = [MOVE, WORK, CARRY];
-var upgraderBody = [MOVE, WORK, CARRY];
+var harvesterBody = [MOVE, MOVE, WORK, WORK, WORK, CARRY];
+var upgraderBody = [MOVE, MOVE, WORK, WORK, CARRY];
+var builderBody = [MOVE, WORK, CARRY];
 
 function isStructureToBuild(room)
 {
@@ -110,7 +111,7 @@ module.exports.loop = function ()
     if (buildersCount < Game.spawns["Spawn1"].memory.buildersMax)
     {
       console.log("Not enough builders");
-      Game.spawns["Spawn1"].spawnCreep(upgraderBody, "builder_" + buildersCount+1, { memory: {role: 'builder' } })
+      Game.spawns["Spawn1"].spawnCreep(builderBody, "builder_" + buildersCount+1, { memory: {role: 'builder' } })
     }
 
 }
