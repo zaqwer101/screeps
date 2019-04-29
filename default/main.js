@@ -56,9 +56,14 @@ module.exports.loop = function ()
               roleHarvester.run(creep);
             else
               if (isStructureToBuild(creep.room))
+              {
+                console.log("Harvester gonna build");
                 roleBuilder.run(creep);
+              }
               else
+              {
                 roleUpgrader.run(creep);
+              }
         }
         if(creep.memory.role == 'upgrader')
         {
