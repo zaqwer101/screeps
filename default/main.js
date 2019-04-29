@@ -8,7 +8,6 @@ var upgraderBody = [MOVE, WORK, CARRY];
 
 module.exports.loop = function ()
 {
-    console.log("Github test 2");
     var harvestersCount = 0, buildersCount = 0, upgradersCount = 0;
     for(var name in Game.creeps)
     {
