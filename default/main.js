@@ -53,6 +53,11 @@ module.exports.loop = function ()
         position.forEach(
           function(lookObject)
           {
+            if (!Game.spawns["Spawn1"].memory.frequentPoints.length)
+            {
+              var Game.spawns["Spawn1"].memory.frequentPoints = [];
+            }
+            else {
             if(lookObject.type != STRUCTURE_ROAD)
             {
               if(countDuplicates(Game.spawns["Spawn1"].memory.frequentPoints.length, creep.pos) >= 10)
@@ -72,6 +77,7 @@ module.exports.loop = function ()
                 Game.spawns["Spawn1"].memory.frequentPoints.push(creep.pos);
               }
             }
+          }
           }
         );
 
