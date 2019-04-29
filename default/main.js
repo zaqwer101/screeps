@@ -57,11 +57,12 @@ module.exports.loop = function ()
             else
               if (isStructureToBuild(creep.room))
               {
-                console.log("Harvester gonna build");
+                console.log("Harvester " + creep.name + " gonna build");
                 roleBuilder.run(creep);
               }
               else
               {
+                console.log("Harvester " + creep.name + " gonna upgrade");
                 roleUpgrader.run(creep);
               }
         }
