@@ -56,6 +56,7 @@ module.exports.loop = function ()
             if (!Game.spawns["Spawn1"].memory.frequentPoints.length)
             {
               Game.spawns["Spawn1"].memory.frequentPoints = [];
+              Game.spawns["Spawn1"].memory.frequentPoints.push(creep.pos);
             }
             else {
             if(lookObject.type != STRUCTURE_ROAD)
