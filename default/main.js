@@ -53,7 +53,9 @@ module.exports.loop = function ()
         if(creep.memory.role == 'harvester')
         {
             if (!isStorageFull(creep.room))
+            {
               roleHarvester.run(creep);
+            }
             else
               if (isStructureToBuild(creep.room))
               {
@@ -73,12 +75,20 @@ module.exports.loop = function ()
         if(creep.memory.role == 'builder')
         {
           if (isStructureToBuild(creep.room))
+          {
             roleBuilder.run(creep);
+          }
           else
+          {
             if (!isStorageFull(creep.room))
+            {
               roleHarvester.run(creep);
+            }
             else
+            {
               roleUpgrader.run(creep);
+            }
+          }
         }
     }
     console.log("Harvesters: " + harvestersCount + ", upgraders: " + upgradersCount + ", builders: " + buildersCount);
@@ -88,7 +98,6 @@ module.exports.loop = function ()
     {
       console.log("Not enough harvesters");
       Game.spawns["Spawn1"].spawnCreep(harvesterBody, "harvester_" + (harvestersCount + 1), { memory: {role: 'harvester' } })
-      console.log(harvestersCount + 1);
     }
 
     // Spawn upgrader if needed
