@@ -31,14 +31,13 @@ function isStorageFull(room)
   for(var structure in room.find(FIND_STRUCTURES))
   {
     var e = (structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) && (structure.energy < structure.energyCapacity);
+    console.log(structure.structureType + " " + e);
     if (e)
     {
-      console.log(structure.structureType + " " + e);
       return false;
       break;
     }
   }
-  console.log(structure.structureType + " " + e);
   return true;
 }
 
