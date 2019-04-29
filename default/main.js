@@ -16,7 +16,7 @@ function isStructureToBuild(room)
 
 function isStorageFull(room)
 {
-  bool isFull = false;
+  var isFull = false;
   for(var structure in room.find(FIND_STRUCTURES))
   {
     if ((structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) && structure.energy < structure.energyCapacity)
