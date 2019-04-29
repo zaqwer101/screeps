@@ -28,17 +28,14 @@ function isStructureToBuild(room)
 
 function isStorageFull(room)
 {
-  var isFull = true;
   for(var structure in room.find(FIND_STRUCTURES))
   {
     if ((structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) && structure.energy < structure.energyCapacity)
     {
-      isFull = false;
-      break;
+      return false;
     }
   }
-
-  return isFull;
+  return true;
 }
 
 module.exports.loop = function ()
