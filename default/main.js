@@ -5,6 +5,22 @@ var roleBuilder = require('role.builder');
 var harvesterBody = [MOVE, WORK, CARRY];
 var upgraderBody = [MOVE, WORK, CARRY];
 
+function isStructureToBuild()
+{
+  var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+  if(targets.length)
+    return true;
+  else
+    return false;
+}
+
+function isStorageFull()
+{
+  if (Game.spawns["Spawn1"].energyCapacity == Game.spawns["Spawn1"].energy)
+    return true;
+  else
+    return false;
+}
 
 module.exports.loop = function ()
 {
@@ -29,14 +45,13 @@ module.exports.loop = function ()
         // Assign roles to workers
         if(creep.memory.role == 'harvester')
         {
-            if (Game.spawns["Spawn1"].energyCapacity == Game.spawns["Spawn1"].energy)
-            {
-              roleBuilder.run(creep);
-            }
-            else
-            {
+            if (!isStorageFull())
               roleHarvester.run(creep);
-            }
+            else
+              if (isStructureToBuild())
+                roleBuilder.run(creep);
+              else
+                roleUpgrader.run(creep);
         }
         if(creep.memory.role == 'upgrader')
         {
@@ -44,7 +59,13 @@ module.exports.loop = function ()
         }
         if(creep.memory.role == 'builder')
         {
-          roleBuilder.run(creep);
+          if (isStructureToBuild())
+            roleBuilder.run(creep);
+          else
+            if (!isStorageFull())
+              roleHarvester.run(creep);
+            else
+              roleUpgrader.run(creep);
         }
     }
     console.log("Harvesters: " + harvestersCount + ", upgraders: " + upgradersCount + ", builders: " + buildersCount);
