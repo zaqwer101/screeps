@@ -2,7 +2,7 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 
-var harvesterBody = [MOVE, WORK, CARRY];
+var harvesterBody = [MOVE, MOVE, MOVE, WORK, WORK, CARRY];
 var upgraderBody = [MOVE,  MOVE, MOVE, WORK, WORK, CARRY];
 var builderBody = [MOVE, WORK, CARRY];
 
