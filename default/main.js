@@ -70,7 +70,6 @@ module.exports.loop = function ()
     }
     console.log("Harvesters: " + harvestersCount + ", upgraders: " + upgradersCount + ", builders: " + buildersCount);
 
-
     // Spawn harvester if needed
     if (harvestersCount < Game.spawns["Spawn1"].memory.harvestersMax)
     {
@@ -78,6 +77,7 @@ module.exports.loop = function ()
       Game.spawns["Spawn1"].spawnCreep(harvesterBody, "harvester_" + (harvestersCount + 1), { memory: {role: 'harvester' } })
       console.log(harvestersCount + 1);
     }
+
     // Spawn upgrader if needed
     if (upgradersCount < Game.spawns["Spawn1"].memory.upgradersMax)
     {
