@@ -5,9 +5,9 @@ var roleBuilder = require('role.builder');
 var harvesterBody = [MOVE, WORK, CARRY];
 var upgraderBody = [MOVE, WORK, CARRY];
 
-function isStructureToBuild()
+function isStructureToBuild(room)
 {
-  var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+  var targets = room.find(FIND_CONSTRUCTION_SITES);
   if(targets.length)
     return true;
   else
@@ -48,7 +48,7 @@ module.exports.loop = function ()
             if (!isStorageFull())
               roleHarvester.run(creep);
             else
-              if (isStructureToBuild())
+              if (isStructureToBuild(creep.room))
                 roleBuilder.run(creep);
               else
                 roleUpgrader.run(creep);
@@ -59,7 +59,7 @@ module.exports.loop = function ()
         }
         if(creep.memory.role == 'builder')
         {
-          if (isStructureToBuild())
+          if (isStructureToBuild(creep.room))
             roleBuilder.run(creep);
           else
             if (!isStorageFull())
