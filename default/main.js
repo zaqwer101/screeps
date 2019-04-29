@@ -3,7 +3,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 
 var harvesterBody = [MOVE, MOVE, WORK, WORK, WORK, CARRY];
-var upgraderBody = [MOVE, MOVE, WORK, WORK, CARRY];
+var upgraderBody = [MOVE,  MOVE, MOVE, WORK, WORK, CARRY];
 var builderBody = [MOVE, WORK, CARRY];
 
 function isStructureToBuild(room)
@@ -17,17 +17,17 @@ function isStructureToBuild(room)
 
 function isStorageFull(room)
 {
-  var isFull = false;
+  var isNotFull = false;
   for(var structure in room.find(FIND_STRUCTURES))
   {
     if ((structure.structureType == STRUCTURE_EXTENSION || structure.structureType == STRUCTURE_SPAWN) && structure.energy < structure.energyCapacity)
     {
-      isFull = true;
+      isNotFull = true;
       break;
     }
   }
 
-  return isFull;
+  return !isNotFull;
 }
 
 module.exports.loop = function ()
