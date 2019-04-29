@@ -75,7 +75,7 @@ module.exports.loop = function ()
                 }
               }
             }
-            catch()
+            catch
             {
               Game.spawns["Spawn1"].memory.frequentPoints = [];
               Game.spawns["Spawn1"].memory.frequentPoints.push(creep.pos);
