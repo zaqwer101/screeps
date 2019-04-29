@@ -50,39 +50,6 @@ module.exports.loop = function ()
         var creep = Game.creeps[name];
 
         var position = creep.room.lookAt(creep.pos);
-        position.forEach(
-          function(lookObject)
-          {
-            try
-            {
-              if(lookObject.type != STRUCTURE_ROAD)
-              {
-                if(countDuplicates(Game.spawns["Spawn1"].memory.frequentPoints.length, creep.pos) >= 10)
-                {
-                  for(var i=0; i < Game.spawns["Spawn1"].memory.frequentPoints.length; i++)
-                  {
-                    if(Game.spawns["Spawn1"].memory.frequentPoints[i] === creep.pos)
-                    {
-                      Game.spawns["Spawn1"].memory.frequentPoints.splice(i, 1);
-                    }
-                  }
-                  creep.pos.createConstructionSite(STRUCTURE_ROAD);
-                  console.log("Road is gonna to be build");
-                }
-                else
-                {
-                  Game.spawns["Spawn1"].memory.frequentPoints.push(creep.pos);
-                }
-              }
-            }
-            catch(err)
-            {
-              Game.spawns["Spawn1"].memory.frequentPoints = [];
-              Game.spawns["Spawn1"].memory.frequentPoints.push(creep.pos);
-            }
-          }
-        );
-
         if (name.split("_")[0] == "harvester")
         {
           harvestersCount++;
