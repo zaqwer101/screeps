@@ -37,6 +37,18 @@ module.exports.loop = function ()
     {
         // Collect current amount of workers
         var creep = Game.creeps[name];
+
+        var position = creep.room.lookAt(creep.pos);
+        position.forEach(
+          function(lookObject)
+          {
+            if(lookObject.type != STRUCTURE_ROAD)
+            {
+              Game.spawns["Spawn1"].memory.frequentPoints.push(creep.pos);
+            }
+          }
+        );
+
         if (name.split("_")[0] == "harvester")
         {
           harvestersCount++;
