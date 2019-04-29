@@ -6,18 +6,15 @@ var harvesterBody = [MOVE, MOVE, WORK, WORK, WORK, CARRY];
 var upgraderBody = [MOVE,  MOVE, MOVE, WORK, WORK, CARRY];
 var builderBody = [MOVE, WORK, CARRY];
 
-function countDuplicates(original) {
-  const uniqueItems = new Set();
-  const duplicates = new Set();
-  for (const value of original) {
-    if (uniqueItems.has(value)) {
-      duplicates.add(value);
-      uniqueItems.delete(value);
-    } else {
-      uniqueItems.add(value);
-    }
+function countDuplicates(array, value)
+{
+  var counter = 0;
+  for (elem in array)
+  {
+    if (elem === value)
+      counter++;
   }
-  return duplicates.size;
+  return counter;
 }
 
 function isStructureToBuild(room)
@@ -58,7 +55,7 @@ module.exports.loop = function ()
           {
             if(lookObject.type != STRUCTURE_ROAD)
             {
-              if(countDuplicates(creep.pos) >= 10)
+              if(countDuplicates(Game.spawns["Spawn1"].memory.frequentPoints.length, creep.pos) >= 10)
               {
                 for(var i=0; i < Game.spawns["Spawn1"].memory.frequentPoints.length; i++)
                 {
