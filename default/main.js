@@ -59,6 +59,8 @@ module.exports.loop = function ()
               roleHarvester.run(creep);
             }
             else
+            {
+              console.log("Storage is full");
               if (isStructureToBuild(creep.room))
               {
                 console.log("Harvester " + creep.name + " gonna build");
@@ -69,6 +71,7 @@ module.exports.loop = function ()
                 console.log("Harvester " + creep.name + " gonna upgrade");
                 roleUpgrader.run(creep);
               }
+            }
         }
 
         if(creep.memory.role == 'upgrader')
