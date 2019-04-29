@@ -6,6 +6,20 @@ var harvesterBody = [MOVE, MOVE, WORK, WORK, WORK, CARRY];
 var upgraderBody = [MOVE,  MOVE, MOVE, WORK, WORK, CARRY];
 var builderBody = [MOVE, WORK, CARRY];
 
+function countDuplicates(original) {
+  const uniqueItems = new Set();
+  const duplicates = new Set();
+  for (const value of original) {
+    if (uniqueItems.has(value)) {
+      duplicates.add(value);
+      uniqueItems.delete(value);
+    } else {
+      uniqueItems.add(value);
+    }
+  }
+  return duplicates.size;
+}
+
 function isStructureToBuild(room)
 {
   var targets = room.find(FIND_CONSTRUCTION_SITES);
@@ -44,7 +58,22 @@ module.exports.loop = function ()
           {
             if(lookObject.type != STRUCTURE_ROAD)
             {
-              Game.spawns["Spawn1"].memory.frequentPoints.push(creep.pos);
+              if(countDuplicates(creep.pos) >= 10)
+              {
+                for(int i=0; i < Game.spawns["Spawn1"].memory.frequentPoints.length; i++)
+                {
+                  if(Game.spawns["Spawn1"].memory.frequentPoints[i] === creep.pos)
+                  {
+                    Game.spawns["Spawn1"].memory.frequentPoints.splice(i, 1);
+                  }
+                }
+                creep.pos.createConstructionSite(STRUCTURE_ROAD);
+                console.log("Road is gonna to be build");
+              }
+              else
+              {
+                Game.spawns["Spawn1"].memory.frequentPoints.push(creep.pos);
+              }
             }
           }
         );
