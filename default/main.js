@@ -53,32 +53,33 @@ module.exports.loop = function ()
         position.forEach(
           function(lookObject)
           {
-            if (!Game.spawns["Spawn1"].memory.frequentPoints.length)
+            try
+            {
+              if(lookObject.type != STRUCTURE_ROAD)
+              {
+                if(countDuplicates(Game.spawns["Spawn1"].memory.frequentPoints.length, creep.pos) >= 10)
+                {
+                  for(var i=0; i < Game.spawns["Spawn1"].memory.frequentPoints.length; i++)
+                  {
+                    if(Game.spawns["Spawn1"].memory.frequentPoints[i] === creep.pos)
+                    {
+                      Game.spawns["Spawn1"].memory.frequentPoints.splice(i, 1);
+                    }
+                  }
+                  creep.pos.createConstructionSite(STRUCTURE_ROAD);
+                  console.log("Road is gonna to be build");
+                }
+                else
+                {
+                  Game.spawns["Spawn1"].memory.frequentPoints.push(creep.pos);
+                }
+              }
+            }
+            catch()
             {
               Game.spawns["Spawn1"].memory.frequentPoints = [];
               Game.spawns["Spawn1"].memory.frequentPoints.push(creep.pos);
             }
-            else {
-            if(lookObject.type != STRUCTURE_ROAD)
-            {
-              if(countDuplicates(Game.spawns["Spawn1"].memory.frequentPoints.length, creep.pos) >= 10)
-              {
-                for(var i=0; i < Game.spawns["Spawn1"].memory.frequentPoints.length; i++)
-                {
-                  if(Game.spawns["Spawn1"].memory.frequentPoints[i] === creep.pos)
-                  {
-                    Game.spawns["Spawn1"].memory.frequentPoints.splice(i, 1);
-                  }
-                }
-                creep.pos.createConstructionSite(STRUCTURE_ROAD);
-                console.log("Road is gonna to be build");
-              }
-              else
-              {
-                Game.spawns["Spawn1"].memory.frequentPoints.push(creep.pos);
-              }
-            }
-          }
           }
         );
 
