@@ -4,7 +4,7 @@ var roleBuilder = require('role.builder');
 
 var harvesterBody = [MOVE, MOVE, MOVE, WORK, WORK, CARRY];
 var upgraderBody = [MOVE,  MOVE, MOVE, WORK, WORK, CARRY];
-var builderBody = [MOVE, WORK, CARRY];
+var builderBody = [MOVE, WORK, CARRY, WORK, WORK];
 
 function countDuplicates(array, value)
 {
