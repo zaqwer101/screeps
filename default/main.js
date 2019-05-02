@@ -8,6 +8,7 @@ var builderBody = [MOVE, WORK, CARRY];
 
 function countDuplicates(array, value)
 {
+  console.log("Test");
   var counter = 0;
   for (elem in array)
   {
